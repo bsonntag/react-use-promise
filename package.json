@@ -1,0 +1,58 @@
+{
+  "name": "react-use-promise",
+  "version": "0.0.0-alpha.0",
+  "description": "React hook for handling promises.",
+  "keywords": [
+    "hook",
+    "hooks",
+    "promise",
+    "promises",
+    "react"
+  ],
+  "repository": "git@github.com:bsonntag/react-use-promise.git",
+  "license": "MIT",
+  "author": "Benjamim Sonntag <benjamimsonntag@gmail.com>",
+  "main": "dist/index.js",
+  "scripts": {
+    "bundle": "rm -rf dist && babel src --out-dir dist --ignore **/*.test.js",
+    "bundle:watch": "babel src --out-dir dist --watch --ignore **/*.test.js",
+    "coveralls": "jest --coverage --silent --coverageReporters=text-lcov | coveralls",
+    "example": "parcel --out-dir build example/index.html",
+    "lint": "eslint src",
+    "test": "jest",
+    "test:watch": "jest --watch --notify",
+    "version": "npm run bundle && git add dist"
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "coveragePathIgnorePatterns": [
+      "jest-setup.js"
+    ],
+    "coverageReporters": [
+      "html",
+      "lcov",
+      "text"
+    ],
+    "setupTestFrameworkScriptFile": "./jest-setup.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.7.0",
+    "eslint-config-seegno": "^11.0.1",
+    "jest": "^23.6.0",
+    "jest-dom": "^2.1.0",
+    "parcel-bundler": "^1.10.3",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
+    "react-testing-library": "^5.2.3"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0-alpha.0"
+  }
+}

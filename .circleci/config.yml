@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.12
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore node_modules cache
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Node version
+          command: node --version
+
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+
+      - run:
+          name: Lint
+          command: yarn lint
+
+      - run:
+          name: Tests
+          command: yarn test
+
+      - run:
+          name: Coverage
+          command: yarn coveralls
+
+      - save_cache:
+          name: Save node_modules cache
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
