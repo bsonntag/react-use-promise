@@ -30,13 +30,16 @@ $ yarn add react@16.7.0-alpha.0 react-dom@16.7.0-alpha.0
 ## Usage
 
 ```js
-import React from 'react';
+import React, { useMemo } from 'react';
 import usePromise from 'react-use-promise';
 
 function Example() {
-  const [result, error] = usePromise(() => new Promise(resolve => {
-    setTimeout(() => resolve('foo'), 2000);
-  }));
+  const [result, error] = usePromise(useMemo(
+    () => new Promise(resolve => {
+      setTimeout(() => resolve('foo'), 2000);
+    }),
+    []
+  ));
 
   return (
     <p>
@@ -49,11 +52,31 @@ function Example() {
 ## API
 
 ```js
-usePromise(() => Promise): [any, any]
+usePromise(Promise | () => Promise): [any, any]
 ```
 
-Receives a function that returns a promise and returns a tuple
+Receives a promise or a function that returns a promise and returns a tuple
 with the promise's result and error.
+
+**Note:** You'll probably want to avoid passing new promises on each render.
+This can happen if you do something like this:
+
+```js
+const [response, error] = usePromise(fetch(url));
+```
+
+This will call `fetch` on every render, which will return a new promise each time.
+In this case, wrap the promise in `useMemo` or `useCallback`, so that you only pass
+a new promise when something changes. Example:
+
+```js
+const [response, error] = usePromise(useMemo(
+  () => fetch(url),
+  [url]
+));
+```
+
+This will only call `fetch` when the `url` changes.
 
 ## Contributing
 
