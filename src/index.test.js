@@ -5,21 +5,17 @@ import usePromise from '.';
 const Test = ({ promise }) => {
   const [result, error] = usePromise(promise);
 
-  return (
-    <p>
-      {error || result}
-    </p>
-  );
+  return String(error || result);
 };
 
 test('should return the resolved value', async () => {
-  const app = <Test promise={() => Promise.resolve('foo')} />;
+  const app = <Test promise={Promise.resolve('foo')} />;
   const { container, rerender } = render(app);
 
   rerender(app);
 
   await wait(() => {
-    expect(container.firstChild.textContent).toBe('foo');
+    expect(container).toHaveTextContent('foo');
   });
 });
 
@@ -30,6 +26,17 @@ test('should return the rejected value', async () => {
   rerender(app);
 
   await wait(() => {
-    expect(container.firstChild.textContent).toBe('foo');
+    expect(container).toHaveTextContent('foo');
+  });
+});
+
+test('should return null if there is no promise', async () => {
+  const app = <Test />;
+  const { container, rerender } = render(app);
+
+  rerender(app);
+
+  await wait(() => {
+    expect(container).toHaveTextContent('null');
   });
 });

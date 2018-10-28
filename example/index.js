@@ -1,23 +1,18 @@
 import { render } from 'react-dom';
-import React from 'react';
+import React, { useMemo } from 'react';
 import usePromise from '../src';
 
 const Example = () => {
-  const [result, error] = usePromise(() => new Promise(resolve => {
-    setTimeout(() => resolve('foo'), 2000);
-  }));
-
-  if (error) {
-    return (
-      <p>
-        {error.message}
-      </p>
-    );
-  }
+  const [result, error] = usePromise(useMemo(
+    () => new Promise(resolve => {
+      setTimeout(() => resolve('foo'), 2000);
+    }),
+    []
+  ));
 
   return (
     <p>
-      {result}
+      {result || error}
     </p>
   );
 };
