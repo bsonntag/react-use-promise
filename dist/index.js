@@ -15,6 +15,14 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function resolvePromise(promise) {
+  if (typeof promise === 'function') {
+    return promise();
+  }
+
+  return promise;
+}
+
 function usePromise(promise) {
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -27,8 +35,14 @@ function usePromise(promise) {
       setError = _useState4[1];
 
   (0, _react.useEffect)(function () {
+    promise = resolvePromise(promise);
+
+    if (!promise) {
+      return;
+    }
+
     var canceled = false;
-    promise().then(function (result) {
+    promise.then(function (result) {
       return !canceled && setResult(result);
     }, function (error) {
       return !canceled && setError(error);
@@ -36,7 +50,7 @@ function usePromise(promise) {
     return function () {
       canceled = true;
     };
-  }, []);
+  }, [promise]);
   return [result, error];
 }
 
