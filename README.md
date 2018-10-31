@@ -94,6 +94,14 @@ const [response, error] = usePromise(useMemo(
 
 This will only call `fetch` when the `url` changes.
 
+## Development
+
+Clone the repo and install the dependencies by running `yarn` on the project's
+root directory (or `npm install`, if you don't have yarn installed).
+
+Tests can be run with `yarn test` (or `npm test`) and there's an example
+application that can be run with `yarn example` (or `npm run example`).
+
 ## Contributing
 
 Please feel free to submit any issues or pull requests.
