@@ -1,4 +1,4 @@
-import { render, wait } from 'react-testing-library';
+import { cleanup, render, wait } from 'react-testing-library';
 import React from 'react';
 import usePromise from '.';
 
@@ -7,6 +7,8 @@ const Test = ({ promise }) => {
 
   return String(error || result);
 };
+
+afterEach(cleanup);
 
 test('should return the resolved value', async () => {
   const app = <Test promise={Promise.resolve('foo')} />;
