@@ -18,7 +18,7 @@
     "bundle:watch": "babel src --out-dir dist --watch --ignore **/*.test.js",
     "coveralls": "jest --coverage --silent --coverageReporters=text-lcov | coveralls",
     "example": "parcel --out-dir build example/index.html",
-    "lint": "eslint src",
+    "lint": "eslint .",
     "test": "jest",
     "test:watch": "jest --watch --notify",
     "version": "npm run bundle && git add dist"
