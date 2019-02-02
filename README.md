@@ -50,7 +50,7 @@ import React, { useMemo } from 'react';
 import usePromise from 'react-use-promise';
 
 function Example() {
-  const [result, error] = usePromise(useMemo(
+  const [result, error, state] = usePromise(useMemo(
     () => new Promise(resolve => {
       setTimeout(() => resolve('foo'), 2000);
     }),
@@ -58,9 +58,10 @@ function Example() {
   ));
 
   return (
-    <p>
-      {result || error}
-    </p>
+    <div>
+      <p>{state}</p>
+      <p>{result || error}</p>
+    </div>
   );
 }
 ```
@@ -68,11 +69,16 @@ function Example() {
 ## API
 
 ```js
-usePromise(Promise | () => Promise): [any, any]
+usePromise<Result, Error>(Promise<Result, Error> | () => Promise<Result, Error>): [
+  Result,
+  Error,
+  'pending' | 'resolved' | 'rejected'
+]
 ```
 
-Receives a promise or a function that returns a promise and returns a tuple
-with the promise's result and error.
+Receives a promise or a function that returns a promise and returns an array
+with the promise's result, error and state. The state is a string that can
+have one of three values: `'pending'`, `'resolved'` or `'rejected'`.
 
 **Note:** You'll probably want to avoid passing new promises on each render.
 This can happen if you do something like this:
