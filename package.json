@@ -48,11 +48,11 @@
     "jest": "^23.6.0",
     "jest-dom": "^2.1.0",
     "parcel-bundler": "^1.10.3",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
     "react-testing-library": "^5.2.3"
   },
   "peerDependencies": {
-    "react": "^16.7.0-alpha.0"
+    "react": "^16.8.0-alpha.1"
   }
 }
