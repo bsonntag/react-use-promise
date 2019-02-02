@@ -1,8 +1,13 @@
 .babelrc
 .cache
+.circleci
+.eslintignore
 .eslintrc.js
+.huskyrc.js
+.lintstagedrc.js
 build
 coverage
 example
 jest-setup.js
 src
+yarn.lock
