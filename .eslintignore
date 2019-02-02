@@ -1,4 +1,4 @@
-!.eslintrc.js
+!.*rc.js
 .cache
 build
 coverage
