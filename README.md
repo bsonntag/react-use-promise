@@ -36,11 +36,11 @@ $ yarn add react-use-promise
 ```
 
 Since this module uses React's upcoming Hooks feature,
-to try this out you'll need to install the `16.7.0-alpha.0` version
+to try this out you'll need to install the `16.8.0-alpha.1` version
 of `react` and `react-dom`:
 
 ```sh
-$ yarn add react@16.7.0-alpha.0 react-dom@16.7.0-alpha.0
+$ yarn add react@16.8.0-alpha.1 react-dom@16.8.0-alpha.1
 ```
 
 ## Usage
