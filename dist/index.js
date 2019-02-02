@@ -23,16 +23,54 @@ function resolvePromise(promise) {
   return promise;
 }
 
-function usePromise(promise) {
-  var _useState = (0, _react.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      result = _useState2[0],
-      setResult = _useState2[1];
+var states = {
+  pending: 'pending',
+  rejected: 'rejected',
+  resolved: 'resolved'
+};
 
-  var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      error = _useState4[0],
-      setError = _useState4[1];
+function reducer(state, action) {
+  switch (action.type) {
+    case states.pending:
+      return {
+        error: null,
+        result: null,
+        state: states.pending
+      };
+
+    case states.resolved:
+      return {
+        error: null,
+        result: action.payload,
+        state: states.resolved
+      };
+
+    case states.rejected:
+      return {
+        error: action.payload,
+        result: null,
+        state: states.rejected
+      };
+
+    /* istanbul ignore next */
+
+    default:
+      return state;
+  }
+}
+
+function usePromise(promise) {
+  var _useReducer = (0, _react.useReducer)(reducer, {
+    error: null,
+    result: null,
+    state: states.pending
+  }),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      _useReducer2$ = _useReducer2[0],
+      error = _useReducer2$.error,
+      result = _useReducer2$.result,
+      state = _useReducer2$.state,
+      dispatch = _useReducer2[1];
 
   (0, _react.useEffect)(function () {
     promise = resolvePromise(promise);
@@ -42,16 +80,25 @@ function usePromise(promise) {
     }
 
     var canceled = false;
+    dispatch({
+      type: states.pending
+    });
     promise.then(function (result) {
-      return !canceled && setResult(result);
+      return !canceled && dispatch({
+        payload: result,
+        type: states.resolved
+      });
     }, function (error) {
-      return !canceled && setError(error);
+      return !canceled && dispatch({
+        payload: error,
+        type: states.rejected
+      });
     });
     return function () {
       canceled = true;
     };
   }, [promise]);
-  return [result, error];
+  return [result, error, state];
 }
 
 var _default = usePromise;
