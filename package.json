@@ -52,7 +52,7 @@
     "parcel-bundler": "^1.10.3",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-testing-library": "^5.2.3",
+    "react-testing-library": "^5.8.0",
     "sort-package-json": "^1.18.0"
   },
   "peerDependencies": {
