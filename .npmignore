@@ -8,6 +8,5 @@
 build
 coverage
 example
-jest-setup.js
 src
 yarn.lock
