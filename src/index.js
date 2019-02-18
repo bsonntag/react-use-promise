@@ -43,7 +43,7 @@ function reducer(state, action) {
   }
 }
 
-function usePromise(promise) {
+function usePromise(promise, inputs) {
   const [{ error, result, state }, dispatch] = useReducer(reducer, {
     error: null,
     result: null,
@@ -75,7 +75,7 @@ function usePromise(promise) {
     return () => {
       canceled = true;
     };
-  }, [promise]);
+  }, inputs);
 
   return [result, error, state];
 }

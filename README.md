@@ -42,12 +42,12 @@ import React, { useMemo } from 'react';
 import usePromise from 'react-use-promise';
 
 function Example() {
-  const [result, error, state] = usePromise(useMemo(
+  const [result, error, state] = usePromise(
     () => new Promise(resolve => {
       setTimeout(() => resolve('foo'), 2000);
     }),
     []
-  ));
+  );
 
   return (
     <div>
@@ -61,7 +61,10 @@ function Example() {
 ## API
 
 ```js
-usePromise<Result, Error>(Promise<Result, Error> | () => Promise<Result, Error>): [
+usePromise<Result, Error>(
+  Promise<Result, Error> | () => Promise<Result, Error>,
+  Array<any>
+): [
   Result,
   Error,
   'pending' | 'resolved' | 'rejected'
@@ -72,25 +75,26 @@ Receives a promise or a function that returns a promise and returns an array
 with the promise's result, error and state. The state is a string that can
 have one of three values: `'pending'`, `'resolved'` or `'rejected'`.
 
-**Note:** You'll probably want to avoid passing new promises on each render.
-This can happen if you do something like this:
+**Note:** You'll need to pass the inputs array to `usePromise`, otherwise
+this will try to resolve the promise on every render. For example:
 
 ```js
-const [response, error] = usePromise(fetch(url));
-```
-
-This will call `fetch` on every render, which will return a new promise each time.
-In this case, wrap the promise in `useMemo` or `useCallback`, so that you only pass
-a new promise when something changes. Example:
-
-```js
-const [response, error] = usePromise(useMemo(
+const [response, error] = usePromise(
   () => fetch(url),
   [url]
-));
+);
 ```
 
-This will only call `fetch` when the `url` changes.
+This will only call `fetch` again when the `url` changes.
+
+If you only want to resolve the promise once, pass an empty array, like this:
+
+```js
+const [result, error] = usePromise(
+  () => Notification.requestPermission(),
+  []
+);
+```
 
 ## Development
 

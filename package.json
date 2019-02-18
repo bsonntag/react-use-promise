@@ -32,8 +32,7 @@
       "html",
       "lcov",
       "text"
-    ],
-    "setupTestFrameworkScriptFile": "./jest-setup.js"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -47,12 +46,11 @@
     "eslint-config-seegno": "^11.0.1",
     "husky": "^1.3.1",
     "jest": "^23.6.0",
-    "jest-dom": "^2.1.0",
     "lint-staged": "^8.1.3",
     "parcel-bundler": "^1.10.3",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-testing-library": "^5.2.3",
+    "react-testing-library": "^5.8.0",
     "sort-package-json": "^1.18.0"
   },
   "peerDependencies": {

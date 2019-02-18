@@ -1,14 +1,14 @@
 import { render } from 'react-dom';
-import React, { useMemo } from 'react';
+import React from 'react';
 import usePromise from '../src';
 
 const Example = () => {
-  const [result, error, state] = usePromise(useMemo(
+  const [result, error, state] = usePromise(
     () => new Promise(resolve => {
       setTimeout(() => resolve('foo'), 2000);
     }),
     []
-  ));
+  );
 
   return (
     <>
