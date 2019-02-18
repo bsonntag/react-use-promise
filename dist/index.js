@@ -59,7 +59,7 @@ function reducer(state, action) {
   }
 }
 
-function usePromise(promise) {
+function usePromise(promise, inputs) {
   var _useReducer = (0, _react.useReducer)(reducer, {
     error: null,
     result: null,
@@ -97,7 +97,7 @@ function usePromise(promise) {
     return function () {
       canceled = true;
     };
-  }, [promise]);
+  }, inputs);
   return [result, error, state];
 }
 

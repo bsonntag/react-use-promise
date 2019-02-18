@@ -1,6 +1,6 @@
 {
   "name": "react-use-promise",
-  "version": "0.0.0-alpha.2",
+  "version": "0.1.0",
   "description": "React hook for handling promises.",
   "keywords": [
     "hook",
