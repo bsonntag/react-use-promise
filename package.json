@@ -13,6 +13,7 @@
   "license": "MIT",
   "author": "Benjamim Sonntag <benjamimsonntag@gmail.com>",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "bundle": "rm -rf dist && babel src --out-dir dist --ignore **/*.test.js",
     "bundle:watch": "babel src --out-dir dist --watch --ignore **/*.test.js",
