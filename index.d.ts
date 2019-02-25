@@ -7,4 +7,4 @@ declare function usePromise<Result = any>(
   'pending' | 'resolved' | 'rejected'
 ];
 
-export = usePromise;
+export default usePromise;
