@@ -38,11 +38,15 @@ afterEach(cleanup);
 test('should return a `pending` state while the promise is resolving', () => {
   const promise = new TestPromise();
   let state;
+  let result;
+  let error;
 
   testHook(() => {
-    [,, state] = usePromise(promise, []);
+    [result, error, state] = usePromise(promise, []);
   });
 
+  expect(result).toBe(undefined);
+  expect(error).toBe(undefined);
   expect(state).toBe('pending');
 });
 
@@ -50,42 +54,44 @@ test('should return the resolved value', () => {
   const promise = new TestPromise();
   let state;
   let result;
+  let error;
 
   testHook(() => {
-    [result,, state] = usePromise(promise, []);
+    [result, error, state] = usePromise(promise, []);
   });
-
-  expect(state).toBe('pending');
 
   act(() => promise.resolve('foo'));
 
   expect(state).toBe('resolved');
   expect(result).toBe('foo');
+  expect(error).toBe(undefined);
 });
 
 test('should return the rejected value', () => {
   const promise = new TestPromise();
+  let result;
   let state;
   let error;
 
   testHook(() => {
-    [, error, state] = usePromise(promise, []);
+    [result, error, state] = usePromise(promise, []);
   });
 
   act(() => promise.reject('foo'));
 
+  expect(result).toBe(undefined);
   expect(state).toBe('rejected');
   expect(error).toBe('foo');
 });
 
-test('should return a null result if there is no promise', () => {
+test('should return an undefined result if there is no promise', () => {
   let result;
 
   testHook(() => {
     [result] = usePromise(null, []);
   });
 
-  expect(result).toBe(null);
+  expect(result).toBe(undefined);
 });
 
 test('should return to the pending state if the inputs change', () => {
