@@ -135,3 +135,18 @@ test('should call the callback again if the inputs change', () => {
 
   expect(callback).toBeCalledTimes(2);
 });
+
+test('should rerun promise if refresh is called', () => {
+  const callback = jest.fn(() => new TestPromise());
+  let refresh;
+
+  testHook(() => {
+    [, , , refresh] = usePromise(callback, []);
+  });
+
+  expect(callback).toBeCalledTimes(1);
+  act(() => {
+    refresh();
+  });
+  expect(callback).toBeCalledTimes(2);
+});
