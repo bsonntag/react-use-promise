@@ -50,7 +50,7 @@ function usePromise(promise, inputs) {
     state: states.pending
   });
 
-  useEffect(() => {
+  function runPromise() {
     promise = resolvePromise(promise);
 
     if (!promise) {
@@ -75,9 +75,11 @@ function usePromise(promise, inputs) {
     return () => {
       canceled = true;
     };
-  }, inputs);
+  }
 
-  return [result, error, state];
+  useEffect(runPromise, inputs);
+
+  return [result, error, state, runPromise];
 }
 
 export default usePromise;
