@@ -17,7 +17,6 @@
   "scripts": {
     "bundle": "rm -rf dist && babel src --out-dir dist --ignore **/*.test.js",
     "bundle:watch": "babel src --out-dir dist --watch --ignore **/*.test.js",
-    "coveralls": "jest --coverage --silent --coverageReporters=text-lcov | coveralls",
     "example": "parcel --out-dir build example/index.html",
     "lint": "eslint .",
     "test": "jest",
@@ -42,7 +41,6 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
-    "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
     "eslint-config-seegno": "^11.0.1",
     "husky": "^1.3.1",

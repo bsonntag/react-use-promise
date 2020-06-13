@@ -1,7 +1,6 @@
 # react-use-promise
 
 [![CircleCI](https://circleci.com/gh/bsonntag/react-use-promise.svg?style=svg)](https://circleci.com/gh/bsonntag/react-use-promise)
-[![Coverage Status](https://coveralls.io/repos/github/bsonntag/react-use-promise/badge.svg?branch=master)](https://coveralls.io/github/bsonntag/react-use-promise?branch=master)
 
 React hook for handling promises.
 

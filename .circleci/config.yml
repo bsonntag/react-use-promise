@@ -31,10 +31,6 @@ jobs:
           name: Tests
           command: yarn test
 
-      - run:
-          name: Coverage
-          command: yarn coveralls
-
       - save_cache:
           name: Save node_modules cache
           paths:
