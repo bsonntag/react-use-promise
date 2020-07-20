@@ -14,14 +14,16 @@ const states = {
   resolved: 'resolved'
 };
 
+const defaultState = {
+  error: undefined,
+  result: undefined,
+  state: states.pending
+};
+
 function reducer(state, action) {
   switch (action.type) {
     case states.pending:
-      return {
-        error: undefined,
-        result: undefined,
-        state: states.pending
-      };
+      return defaultState;
 
     case states.resolved:
       return {
@@ -44,11 +46,7 @@ function reducer(state, action) {
 }
 
 function usePromise(promise, inputs) {
-  const [{ error, result, state }, dispatch] = useReducer(reducer, {
-    error: undefined,
-    result: undefined,
-    state: states.pending
-  });
+  const [{ error, result, state }, dispatch] = useReducer(reducer, defaultState);
 
   useEffect(() => {
     promise = resolvePromise(promise);

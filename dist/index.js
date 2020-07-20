@@ -28,15 +28,16 @@ var states = {
   rejected: 'rejected',
   resolved: 'resolved'
 };
+var defaultState = {
+  error: undefined,
+  result: undefined,
+  state: states.pending
+};
 
 function reducer(state, action) {
   switch (action.type) {
     case states.pending:
-      return {
-        error: undefined,
-        result: undefined,
-        state: states.pending
-      };
+      return defaultState;
 
     case states.resolved:
       return {
@@ -60,11 +61,7 @@ function reducer(state, action) {
 }
 
 function usePromise(promise, inputs) {
-  var _useReducer = (0, _react.useReducer)(reducer, {
-    error: undefined,
-    result: undefined,
-    state: states.pending
-  }),
+  var _useReducer = (0, _react.useReducer)(reducer, defaultState),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       _useReducer2$ = _useReducer2[0],
       error = _useReducer2$.error,
