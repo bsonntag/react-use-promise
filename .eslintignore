@@ -1,5 +1,5 @@
 !.*rc.js
-.cache
+.parcel-cache
 build
 coverage
 dist
