@@ -53,6 +53,6 @@
     "sort-package-json": "^1.18.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.2"
+    "react": "^16.8.0 || ^17.0.2 || ^18.0.0"
   }
 }
